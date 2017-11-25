@@ -1,4 +1,4 @@
-import { Directive, ViewContainerRef, ElementRef, AfterViewInit, HostListener, Input   } from '@angular/core';
+import { Directive, ViewContainerRef, ElementRef, AfterViewInit, HostListener, Input, OnChanges  } from '@angular/core';
 import * as Chart from 'chart.js'
 import { element } from 'protractor';
 
@@ -7,23 +7,23 @@ import './charts.css';
 @Directive({
   selector: '[chartDirective]',
 })
-export class ChartDirective  implements AfterViewInit{
+export class ChartDirective  implements AfterViewInit, OnChanges {
 
   canvas: any;
   ctx: any;
-  title = 'Monitor de Humedad';
+  titleHumidity = 'Monitor de Humedad';
+  titleTemperature =  'Monitor de Temperatura';
 
-  @Input() ChartData: Array<number>;
+  @Input() ChartData: Array<Array<number>>;
 
   constructor(el: ElementRef) {
       this.canvas = el.nativeElement;
   }
 
-  
-
-  ngAfterViewInit() {
-    
-    let values = [...this.ChartData];
+  makeGraph(animated = true){
+    let values = [...this.ChartData[0]];
+    let humidity = this.getDataSets(this.ChartData[0], 'rgba(99, 132, 255, 1)' , this.titleHumidity);
+    let temperature = this.getDataSets(this.ChartData[1], 'rgba(255, 99, 132, 1)', this.titleTemperature);
 
 
     this.ctx = this.canvas.getContext('2d');
@@ -31,17 +31,30 @@ export class ChartDirective  implements AfterViewInit{
       type: 'line',
       data: {
           labels: values,
-          datasets: [{
-              label: this.title,
-              data: values,
-              backgroundColor: values.map(d=>'rgba(255, 99, 132, 1)'),
-              borderWidth: 1
-          }]
+          datasets: [humidity, temperature]
       },
       options: {
-        responsive: false,
-        display:true
+        responsive: true,
+        animation: animated
       }
     });
+  }
+
+  ngOnChanges(changes){
+    this.makeGraph(false);
+  }
+  
+  getDataSets(data, color,title){
+    return {
+        label: title,
+        data: data,
+        backgroundColor: data.map(d=>color),
+        borderWidth: 1
+    };
+  }
+
+  ngAfterViewInit() {
+    this.makeGraph();
+    
   }
 }

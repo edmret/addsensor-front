@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 import { AppHeader } from './header/app.header';
 import {ChartDirective} from './charts/chart.directive';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import {firebaseConfig} from './config/firebase';
+
 
 @NgModule({
   declarations: [
@@ -15,7 +20,10 @@ import {ChartDirective} from './charts/chart.directive';
     ChartDirective
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
