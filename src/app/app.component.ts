@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'Entrega';
+
+  chartData = [1,5,3,40,9,15,26,38];
+
 }

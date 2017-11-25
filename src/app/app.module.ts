@@ -3,11 +3,16 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { AppHeader } from './header/app.header';
+import {ChartDirective} from './charts/chart.directive';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AppHeader,
+    //directives
+    ChartDirective
   ],
   imports: [
     BrowserModule
