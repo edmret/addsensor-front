@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, Renderer2 } from '@angular/core';
+/*import { Component, AfterViewInit, ElementRef, Renderer2 } from '@angular/core';
 
 
 @Component({
@@ -15,4 +15,4 @@ export class AppMyChart implements AfterViewInit {
     console.log(this.rd);
     console.log(this.el.nativeElement);
   }
-}
+}*/
