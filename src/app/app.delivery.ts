@@ -11,7 +11,7 @@ interface Delivery{
     destination:any,
     origin:any,
     is_active:any
-}
+};
 
 @Component({
     templateUrl: './app.delivery.html',
@@ -115,7 +115,7 @@ interface Delivery{
                 this.getProducts(element.productId);
             });
             
-            console.log(this.currentBox);
+            
         });
     }
 

@@ -1,22 +1,25 @@
-<app-header [title]="title"></app-header>
+<app-header [title]="title" [isHome]="'true'"></app-header>
 <main class="container is-fluid">
     <section class="filters"></section>
-    <article class="truck good" *ngFor="let deli of deliveries">
+    <article class="truck {{deli.cssClass}}" *ngFor="let deli of deliveries">
         <h1 class="title is-4"><strong>Actual:</strong> <a href="/#/delivery/{{deli.key}}">{{deli.key}}</a></h1>
         <div>
             <ul>
+                    <li>
+                        <strong>Placas:</strong> {{deli.truck.placas}}
+                    </li>
                 <li>
-                    <strong>Motor:</strong>
+                    <strong>Motor:</strong> {{deli.truck.Motor}}
                 </li>
                 <li>
-                    <strong>Unidad de enfriamiento:</strong> Mercedez
+                    <strong>Unidad de enfriamiento:</strong> {{deli.truck.unity}}
                 </li>
                 <li>
-                    <strong>Tonelaje:</strong> 3500
+                    <strong>Tonelaje:</strong> {{deli.truck.tonelaje}}
                 </li>
             </ul>
         </div>
-        <div class="progress-bar-truck good" style="width:50%">
+        <div class="progress-bar-truck {{deli.cssClass}}" style="width:50%">
             <i class="fa fa-truck"></i>
         </div>
     </article>

@@ -8,6 +8,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class AppHeader implements OnInit{
   @Input() title: any;
+  @Input() isHome: boolean;
 
   id:any;
 
