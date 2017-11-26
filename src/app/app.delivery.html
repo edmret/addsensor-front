@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header [title]="title"></app-header>
 
 
 
@@ -49,10 +49,10 @@
                                         <app-food [foodData]="prod"></app-food>
                                     </td>
                                     <td>
-                                        {{prod.min}}
+                                        {{prod.quantity}}
                                     </td>
                                     <td>
-                                        {{prod.max}}
+                                        {{prod.min}}
                                     </td>
                                     <td>
                                         {{prod.max}}

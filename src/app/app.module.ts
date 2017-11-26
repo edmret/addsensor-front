@@ -14,10 +14,11 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import {firebaseConfig} from './config/firebase';
 import { RouterModule, Routes } from '@angular/router';
 import {ParamsServiceService} from './params-service.service';
+import {AppDashboard} from './app.dashboard';
 
 const appRoutes: Routes = [
-  { path: 'delivery/:id/:sensor', component: AppDelivery },
-  { path: '', redirectTo: '/delivery/-KzqU16r2P2kYBfRCg9A/-KzqC5RrdQxFPA3gXQrM', pathMatch: 'full' }
+  { path: 'delivery/:id', component: AppDelivery },
+  { path: '', component: AppDashboard }
 ];
 
 
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
     AppHeader,
     AppDelivery,
     Appfood,
-    ChartDirective
+    ChartDirective,
+    AppDashboard
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,7 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     RouterModule.forRoot(
       appRoutes,
-      //{ enableTracing: true } // <-- debugging purposes only
+      { useHash: true } // <-- debugging purposes only
     )
   ],
   providers: [

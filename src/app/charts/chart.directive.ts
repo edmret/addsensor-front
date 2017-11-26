@@ -1,6 +1,7 @@
 import { Directive, ViewContainerRef, ElementRef, AfterViewInit, HostListener, Input, OnChanges  } from '@angular/core';
 import * as Chart from 'chart.js'
 import { element } from 'protractor';
+import * as moment from 'moment';
 
 import './charts.css';
 
@@ -21,8 +22,8 @@ export class ChartDirective  implements AfterViewInit, OnChanges {
   }
 
   makeGraph(animated = true){
-    let values = [...this.ChartData[0]];
-    let humidity = this.getDataSets(this.ChartData[0], 'rgba(99, 132, 255, 1)' , this.titleHumidity, true);
+    let values = [...this.ChartData[2]].map(v=>moment(v).format('LTS'));
+    let humidity = this.getDataSets(this.ChartData[0], 'rgba(99, 132, 255, 1)' , this.titleHumidity);
     let temperature = this.getDataSets(this.ChartData[1], 'rgba(255, 99, 132, 1)', this.titleTemperature);
 
 
@@ -31,7 +32,7 @@ export class ChartDirective  implements AfterViewInit, OnChanges {
       type: 'line',
       data: {
           labels: values,
-          datasets: [humidity, temperature]
+          datasets: [temperature, humidity]
       },
       options: {
         responsive: false,

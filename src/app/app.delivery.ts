@@ -32,7 +32,7 @@ interface Delivery{
     id:any;
     idSensor: any;
   
-    chartData = [ [], [] ];
+    chartData = [ [], [], [] ];
 
     currentTemperature:any = 0;
 
@@ -45,12 +45,12 @@ interface Delivery{
 
       this.route.params.subscribe(params => {
         this.id = params.id;
-        this.idSensor = params.sensor;
-        this.getBoxDetail(params.id, params.sensor);
+        this.getBoxDetail(params.id);
 
         this.afDb.list<any>('tlog', ref=>ref.orderByChild("deliveryId").equalTo(this.id || "0")).valueChanges().subscribe(log=>{
             let humy = log.map(l=>l.humidity);
             let temp = log.map(l=>l.temperature);
+            let timestamp = log.map(l=>l.timestamp);
       
       
             this.minHumidity = Math.min(...(humy || []) );
@@ -61,7 +61,7 @@ interface Delivery{
       
       
       
-            let sendArray = [humy , temp];
+            let sendArray = [humy.slice(-20) , temp.slice(-20), timestamp.slice(-20)];
       
             this.chartData = sendArray;
     
@@ -106,11 +106,10 @@ interface Delivery{
         });
     }
 
-    getBoxDetail(id,sensor){
-        this.afDb.object('Delivery/'+id
-        ).valueChanges().subscribe((del:Delivery)=>{
-            console.log(del);
-            this.currentBox = (del || {boxes:[]}).boxes.find(x=>x.sensor==sensor);
+    getBoxDetail(id){
+        this.afDb.object('Delivery/'+id)
+        .valueChanges().subscribe((del:Delivery)=>{
+            this.currentBox = del.boxes[0];
 
             this.currentBox.products.forEach(element => {
                 this.getProducts(element.productId);
