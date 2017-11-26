@@ -47,7 +47,44 @@ interface Delivery{
         this.id = params.id;
         this.idSensor = params.sensor;
         this.getBoxDetail(params.id, params.sensor);
+
+        this.afDb.list<any>('tlog', ref=>ref.orderByChild("deliveryId").equalTo(this.id || "0")).valueChanges().subscribe(log=>{
+            let humy = log.map(l=>l.humidity);
+            let temp = log.map(l=>l.temperature);
+      
+      
+            this.minHumidity = Math.min(...(humy || []) );
+            this.maxHumidity = Math.max(...(humy || []));
+    
+            this.minTemperature = Math.min(...(temp || []) );
+            this.maxTemperature = Math.max(...(temp || []));
+      
+      
+      
+            let sendArray = [humy , temp];
+      
+            this.chartData = sendArray;
+    
+            this.currentTemperature = (this.chartData[1] || [0]).slice(-1);
+    
+            this.currentBox.products = this.currentBox.products.map(p=>{
+                p.isWarning = this.currentTemperature < p.min || this.currentTemperature > p.max;
+                return p;
+            });
+      
+            /*this._ngZone.runOutsideAngular(() => {
+              this.chartData = sendArray;
+      
+              this._ngZone.run(() => {console.log('Outside Done!') });
+            });*/
+      
+    
+          });
+
+
       });
+
+      
     }
   
     constructor(
@@ -55,38 +92,7 @@ interface Delivery{
         private route: ActivatedRoute,
         private router: Router){
       //afDb.list<any>('test').push({ value1: 24, value2: 25 });
-      afDb.list<any>('tlog').valueChanges().subscribe(log=>{
-        let humy = log.map(l=>l.humidity);
-        let temp = log.map(l=>l.temperature);
-  
-  
-        this.minHumidity = Math.min(...(humy || []) );
-        this.maxHumidity = Math.max(...(humy || []));
-
-        this.minTemperature = Math.min(...(temp || []) );
-        this.maxTemperature = Math.max(...(temp || []));
-  
-  
-  
-        let sendArray = [humy , temp];
-  
-        this.chartData = sendArray;
-
-        this.currentTemperature = (this.chartData[1] || [0]).slice(-1);
-
-        this.currentBox.products = this.currentBox.products.map(p=>{
-            p.isWarning = this.currentTemperature < p.min || this.currentTemperature > p.max;
-            return p;
-        });
-  
-        /*this._ngZone.runOutsideAngular(() => {
-          this.chartData = sendArray;
-  
-          this._ngZone.run(() => {console.log('Outside Done!') });
-        });*/
-  
-
-      });
+      
     }
 
     getProducts (productId) {

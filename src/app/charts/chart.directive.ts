@@ -22,7 +22,7 @@ export class ChartDirective  implements AfterViewInit, OnChanges {
 
   makeGraph(animated = true){
     let values = [...this.ChartData[0]];
-    let humidity = this.getDataSets(this.ChartData[0], 'rgba(99, 132, 255, 1)' , this.titleHumidity);
+    let humidity = this.getDataSets(this.ChartData[0], 'rgba(99, 132, 255, 1)' , this.titleHumidity, true);
     let temperature = this.getDataSets(this.ChartData[1], 'rgba(255, 99, 132, 1)', this.titleTemperature);
 
 
@@ -44,12 +44,13 @@ export class ChartDirective  implements AfterViewInit, OnChanges {
     this.makeGraph(false);
   }
   
-  getDataSets(data, color,title){
+  getDataSets(data, color,title, hidden = false){
     return {
         label: title,
         data: data,
         backgroundColor: data.map(d=>color),
-        borderWidth: 1
+        borderWidth: 1,
+        hidden: hidden
     };
   }
 
