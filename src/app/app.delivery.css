@@ -29,3 +29,7 @@
 .data-descriptor{
     margin-top: 10vh;
 }
+
+.is-data-table-danger{
+    background: #ffdd57;
+}

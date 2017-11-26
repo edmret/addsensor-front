@@ -34,8 +34,8 @@ export class ChartDirective  implements AfterViewInit, OnChanges {
           datasets: [humidity, temperature]
       },
       options: {
-        responsive: true,
-        animation: animated
+        responsive: false,
+        animation: false
       }
     });
   }

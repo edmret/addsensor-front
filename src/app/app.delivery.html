@@ -1,19 +1,21 @@
 <app-header></app-header>
 
+
+
 <main class="container is-fluid">
     
 <div class="container">
         <div class="columns">
             <div class="column">
               
-              <h4 class="title is-3">Humedad mínima registrada</h4>
+              <h4 class="title is-3">Temperatura mínima registrada</h4>
   
-              <p class="data-header is-data-good"><i class="fa fa-thermometer-quarter" aria-hidden="true"></i>{{minHumidity}} °C</p>
+              <p class="data-header is-data-good"><i class="fa fa-thermometer-quarter" aria-hidden="true"></i>{{minTemperature}} °C</p>
             </div>
             <div class="column">
-                <h4 class="title is-3">Humedad máxima registrada</h4>
+                <h4 class="title is-3">Temperatura máxima registrada</h4>
                 
-                <p class="data-header is-data-bad"><i class="fa fa-thermometer-full" aria-hidden="true"></i>{{maxHumidity}} °C</p>
+                <p class="data-header is-data-bad"><i class="fa fa-thermometer-full" aria-hidden="true"></i>{{maxTemperature}} °C</p>
             </div>
         </div>
     </div>
@@ -27,10 +29,39 @@
         <div class="column">
             <article class="message is-success">
                 <h2 class="message-header">
-                  Alertas globales.
+                  Temperatura Actual: <strong>{{currentTemperature}} °C</strong>.
                 </h2>
                 <div class="message-body">
                   <div class="content">
+
+                    <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Productos</th>
+                                    <th>Cantidad</th>
+                                    <th>Temperatura mínima</th>
+                                    <th>Temperatura máxima</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let prod of currentBox.products" class="{{prod.isWarning ? 'is-data-table-danger':''}}">
+                                    <td>
+                                        <app-food [foodData]="prod"></app-food>
+                                    </td>
+                                    <td>
+                                        {{prod.min}}
+                                    </td>
+                                    <td>
+                                        {{prod.max}}
+                                    </td>
+                                    <td>
+                                        {{prod.max}}
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+
                       <h3 class="title is-4">Alertas importantes:</h3>
                       <ul>
                         <li class="is-data-danger">

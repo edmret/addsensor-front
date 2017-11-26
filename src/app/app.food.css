@@ -1,0 +1,16 @@
+.food-ico{
+    background-image: url(/assets/icons.jpg);
+    display: inline-block;
+    width: 29px;
+    height: 29px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.food-ico.steak{
+    background-position: -87px 0;
+}
+
+.food-ico.bacon{
+    background-position: 0 -87px;
+}

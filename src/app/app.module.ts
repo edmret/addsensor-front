@@ -5,6 +5,7 @@ import {AppDelivery} from "./app.delivery";
 
 import { AppComponent } from './app.component';
 import { AppHeader } from './header/app.header';
+import {Appfood} from './app.food';
 import {ChartDirective} from './charts/chart.directive';
 
 import { AngularFireModule } from 'angularfire2';
@@ -15,7 +16,8 @@ import { RouterModule, Routes } from '@angular/router';
 import {ParamsServiceService} from './params-service.service';
 
 const appRoutes: Routes = [
-  { path: 'delivery/:id', component: AppDelivery },
+  { path: 'delivery/:id/:sensor', component: AppDelivery },
+  { path: '', redirectTo: '/delivery/-KzqU16r2P2kYBfRCg9A/-KzqC5RrdQxFPA3gXQrM', pathMatch: 'full' }
 ];
 
 
@@ -24,7 +26,7 @@ const appRoutes: Routes = [
     AppComponent,
     AppHeader,
     AppDelivery,
-    //directives
+    Appfood,
     ChartDirective
   ],
   imports: [
@@ -34,7 +36,7 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      //{ enableTracing: true } // <-- debugging purposes only
     )
   ],
   providers: [
