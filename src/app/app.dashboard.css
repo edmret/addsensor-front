@@ -1,0 +1,54 @@
+.truck{
+    border: solid 1px #CCC;
+    padding: 15px 2vh 2.5em 2vh;
+    border-radius: 11px;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+    
+}
+
+
+
+.truck ul{
+    margin-top: 12px;
+    display: table;
+    width: 100%;
+}
+
+.truck ul li{
+    display: table-cell;
+}
+
+.progress-bar-truck{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+}
+
+.good .progress-bar-truck{
+    background-color: #23d160;
+}
+
+.warn .progress-bar-truck{
+    background-color: #ffdd57;
+}
+
+.bad .progress-bar-truck{
+    background-color: #ff3860;
+}
+
+.progress-bar-truck i{
+    transform: scale(-1, 1);
+    position: absolute;
+    right: 0;
+    font-size: 2em;
+    bottom: 0;
+    color: #ffb454;
+}
+
+.progress-bar-truck::before{
+    content: '';
+
+}

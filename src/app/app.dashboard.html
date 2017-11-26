@@ -1,9 +1,28 @@
 <app-header [title]="title"></app-header>
 <main class="container is-fluid">
-        <section class="filters"></section>
-    <section class="container">
-        <article class="truck">
-            <h1>Entrega Actual: SRX AAA</h1>
+    <section class="filters"></section>
+    <article class="truck good" *ngFor="let deli of deliveries">
+        <h1 class="title is-4"><strong>Actual:</strong> <a href="/#/delivery/{{deli.key}}">{{deli.key}}</a></h1>
+        <div>
+            <ul>
+                <li>
+                    <strong>Motor:</strong>
+                </li>
+                <li>
+                    <strong>Unidad de enfriamiento:</strong> Mercedez
+                </li>
+                <li>
+                    <strong>Tonelaje:</strong> 3500
+                </li>
+            </ul>
+        </div>
+        <div class="progress-bar-truck good" style="width:50%">
+            <i class="fa fa-truck"></i>
+        </div>
+    </article>
+
+    <article class="truck warn">
+            <h1 class="title is-4"><strong>Actual:</strong> <a href="#">SRX AAA</a></h1>
             <div>
                 <ul>
                     <li>
@@ -17,6 +36,48 @@
                     </li>
                 </ul>
             </div>
+            <div class="progress-bar-truck good" style="width:75%">
+                <i class="fa fa-truck"></i>
+            </div>
         </article>
-    </section>
+
+        <article class="truck bad">
+                <h1 class="title is-4"><strong>Actual:</strong> <a href="#">SRX AAA</a></h1>
+                <div>
+                    <ul>
+                        <li>
+                            <strong>Motor:</strong> AA
+                        </li>
+                        <li>
+                            <strong>Unidad de enfriamiento:</strong> Mercedez
+                        </li>
+                        <li>
+                            <strong>Tonelaje:</strong> 3500
+                        </li>
+                    </ul>
+                </div>
+                <div class="progress-bar-truck good" style="width:20%">
+                    <i class="fa fa-truck"></i>
+                </div>
+            </article>
+
+        <article class="truck good">
+                <h1 class="title is-4"><strong>Actual:</strong> <a href="#">SRX AAA</a></h1>
+                <div>
+                    <ul>
+                        <li>
+                            <strong>Motor:</strong> AA
+                        </li>
+                        <li>
+                            <strong>Unidad de enfriamiento:</strong> Mercedez
+                        </li>
+                        <li>
+                            <strong>Tonelaje:</strong> 3500
+                        </li>
+                    </ul>
+                </div>
+                <div class="progress-bar-truck good" style="width:80%">
+                    <i class="fa fa-truck"></i>
+                </div>
+            </article>
 </main>
